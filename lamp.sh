@@ -57,7 +57,7 @@ curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin
 # create a new configuration file called laravel.conf
 cat << EOF | tee /etc/apache2/sites-available/laravel.conf
 <VirtualHost *:80>
-    ServerAdmin kbneyo55@gmail.com
+    ServerAdmin yes@yes.com
     ServerName 192.168.56.40
     ServerAlias www.laravel.local
     DocumentRoot /var/www/laravel/public
@@ -81,7 +81,7 @@ a2ensite laravel.conf
 systemctl restart apache2
 
 # configure Mysql with the cat command
-cat << EOF | mysql -u root -p=53669
+cat << EOF | mysql -u root -p=your_password
 CREATE DATABASE laravel;
 GRANT ALL ON laravel_db.* TO 'root'@'localhost';
 FLUSH PRIVILEGES;
@@ -107,7 +107,7 @@ composer update --no-dev --no-interaction --optimize-autoloader
 cp .env.example .env
 
 # Define the new database password
-NEW_DB_PASSWORD="53669"
+NEW_DB_PASSWORD="your_password"
 
 # Update the DB_PASSWORD in the .env file using sed
 sed -i "s/DB_PASSWORD=.*/DB_PASSWORD=$NEW_DB_PASSWORD/" .env

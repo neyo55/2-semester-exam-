@@ -26,8 +26,8 @@ systemctl start apache2
 apt-get install -y mysql-server
 
 # secure mysql installation automatically
-debconf-set-selections <<< 'mysql-server mysql-server/root_password password 53669'
-debconf-set-selections <<< 'mysql-server mysql-server/root_password_again password 53669'
+debconf-set-selections <<< 'mysql-server mysql-server/root_password password your_password'
+debconf-set-selections <<< 'mysql-server mysql-server/root_password_again password your_password'
 
 # enable mysql and start mysql
 systemctl enable mysql

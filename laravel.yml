@@ -1,0 +1,31 @@
+---
+- name: Execute Bash Script and Verify laravel page Accessibility
+  hosts: slave
+  user: vagrant
+  become: yes
+
+  tasks:
+    - name: Copy the Bash Script to the Slave Node
+      copy:
+        src: ./lamp.sh
+        dest: /tmp/lamp.sh
+        mode: 0755
+      
+
+    - name: Edit the script before execution
+      replace:
+        path: /tmp/lamp.sh
+        regexp: '192.168.56.40'
+        replace: '192.168.56.41'
+        backup: yes
+
+    - name: Execute deployment script
+      shell: /tmp/lamp.sh
+        
+    - name: set cron job to check uptime of the server every 12 am
+      cron:
+        name: set cron job to check uptime of the server every 12 am
+        minute: "0"
+        hour: "0"
+        job: "uptime >> /vagrant/uptime.log"
+        user: vagrant
